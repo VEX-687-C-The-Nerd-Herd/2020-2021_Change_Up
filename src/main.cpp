@@ -1,3 +1,4 @@
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -17,7 +18,6 @@
 // backRight            motor         20              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 /*Drive used: Holonomic Drive/X Drive
-//looks noice, dosen't it?
 / X-drive configuration:
           X FRONT X
         X           X
@@ -87,4 +87,3 @@ int main() {
   Competition.autonomous(autonomous);
   Competition.drivercontrol(drivercontrol);
 }
-//if you read all the way here, either thank you kind stranger or tl;dr, hopefully it works (x-drive)
