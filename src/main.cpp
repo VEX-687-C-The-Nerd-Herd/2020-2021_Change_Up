@@ -18,6 +18,7 @@
 // backRight            motor         20              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 /*Drive used: Holonomic Drive/X Drive
+//looks nice, dosen't it?
 / X-drive configuration:
           X FRONT X
         X           X
@@ -87,3 +88,4 @@ int main() {
   Competition.autonomous(autonomous);
   Competition.drivercontrol(drivercontrol);
 }
+//If you've read all the way to down here, thank you kind stranger, if not, tl;dr, hopefully it works!
