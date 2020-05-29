@@ -1,25 +1,24 @@
-
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       C:\Users\works                                            */
+/*    Author:       Miguel VF                                                 */
 /*    Created:      Sun Apr 26 2020                                           */
-/*    Description:  V5 project                                                */
+/*    Description:  X-drive go X-fly!!!                                       */
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// frontLeft            motor         10              
-// frontRight           motor         11              
-// backLeft             motor         19              
-// backRight            motor         20              
+// Controller1          controller
+// frontLeft            motor         10
+// frontRight           motor         11
+// backLeft             motor         19
+// backRight            motor         20
 // ---- END VEXCODE CONFIGURED DEVICES ----
 /*Drive used: Holonomic Drive/X Drive
-//looks nice, dosen't it?
-/ X-drive configuration:
+  looks nice, dosen't it?
+  X-drive configuration:
           X FRONT X
         X           X
       X  FL       FR  X
@@ -38,43 +37,44 @@ using namespace vex;
 // Competition
 competition Competition;
 
-
-void pre_auton(void) {
-
-}
+void pre_auton(void) {}
 // Autonomous Robot Movement
 void autonomous(void) {
-
-}
-void drivercontrol(void) {
-  while (true) //While true is true, repeat the commands in the next {}
+  while (true) // While true is true, repeat the commands in the next {}
   {
-    while (!Brain.Screen.pressing()) //While NOT (!) the screen is being pressed repeat the commands in the next {}
+    while (
+        !Brain.Screen.pressing()) // While NOT (!) the screen is being pressed
+                                  // repeat the commands in the next {}
     {
-      //Do nothing. Will only get out of this loop when the screen is pressed.
-    } 
-    //Say 'Ouch' where the screen was pressed
-    Brain.Screen.printAt(Brain.Screen.xPosition(),Brain.Screen.yPosition(),"Ouch");
-    } //Go back to while (true) to repeat forever
+      // Do nothing. Will only get out of this loop when the screen is pressed.
+    }
+    // Say 'Ouch' where the screen was pressed
+    Brain.Screen.printAt(Brain.Screen.xPosition(), Brain.Screen.yPosition(),
+                         "Ouch");
+  } // Go back to while (true) to repeat forever
+}
 
-
-    //get the controller values
-    double turnVal = Controller1.Axis4.position(percent); //how much we want the robot to turn (turn)
-    double forwardVal = -1 * Controller1.Axis2.position(percent); //how much we want the robot to go forward (y)
-    double horizontalVal = Controller1.Axis1.position(percent); //how much we want the robot to go sideways (x)
-    //set the motor percntages 
-    double frontLeftVelocity = ((-1*forwardVal) - (horizontalVal) - (turnVal)); 
-    double frontRightVelocity = ((forwardVal) - (horizontalVal) - (turnVal));
-    double backLeftVelocity = ((-1*forwardVal) + (horizontalVal) - (turnVal));
-    double backRightVelocity = ((forwardVal) + (horizontalVal) - (turnVal));
-    //spin to win
-    frontLeft.spin(directionType::fwd, frontLeftVelocity, velocityUnits::pct);
-    frontRight.spin(directionType::fwd, frontRightVelocity, velocityUnits::pct);
-    backLeft.spin(directionType::fwd, backLeftVelocity, velocityUnits::pct);
-    backRight.spin(directionType::fwd, backRightVelocity, velocityUnits::pct);
-    //motor syntax:
-    //motor.spin(directionType dir, double velocity, velocityUnits units)
-    
+void drivercontrol(void) {
+  // get the controller values
+  double turnVal = Controller1.Axis4.position(
+      percent); // how much we want the robot to turn (turn)
+  double forwardVal =
+      -1 * Controller1.Axis2.position(
+               percent); // how much we want the robot to go forward (y)
+  double horizontalVal = Controller1.Axis1.position(
+      percent); // how much we want the robot to go sideways (x)
+  // set the motor percntages
+  double frontLeftVelocity = ((-1 * forwardVal) - (horizontalVal) - (turnVal));
+  double frontRightVelocity = ((forwardVal) - (horizontalVal) - (turnVal));
+  double backLeftVelocity = ((-1 * forwardVal) + (horizontalVal) - (turnVal));
+  double backRightVelocity = ((forwardVal) + (horizontalVal) - (turnVal));
+  // spin to win
+  frontLeft.spin(directionType::fwd, frontLeftVelocity, velocityUnits::pct);
+  frontRight.spin(directionType::fwd, frontRightVelocity, velocityUnits::pct);
+  backLeft.spin(directionType::fwd, backLeftVelocity, velocityUnits::pct);
+  backRight.spin(directionType::fwd, backRightVelocity, velocityUnits::pct);
+  // motor syntax:
+  // motor.spin(directionType dir, double velocity, velocityUnits units)
 }
 
 // Set up  competition and callbacks
