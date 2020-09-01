@@ -1,3 +1,12 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// frontLeft            motor         4               
+// frontRight           motor         11              
+// backLeft             motor         19              
+// backRight            motor         20              
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -7,17 +16,7 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Controller1          controller
-// frontLeft            motor         10
-// frontRight           motor         11
-// backLeft             motor         19
-// backRight            motor         20
-// ---- END VEXCODE CONFIGURED DEVICES ----
 /*Drive used: Holonomic Drive/X Drive
-  looks nice, dosen't it?
   X-drive configuration:
           X FRONT X
         X           X
@@ -31,7 +30,6 @@
 */
 
 #include "vex.h"
-
 using namespace vex;
 
 // Competition
@@ -43,38 +41,37 @@ void autonomous(void) {
   while (true) // While true is true, repeat the commands in the next {}
   {
     while (
-        !Brain.Screen.pressing()) // While NOT (!) the screen is being pressed
+        !Brain.Screen.pressing()) { // While NOT (!) the screen is being pressed
                                   // repeat the commands in the next {}
-    {
-      // Do nothing. Will only get out of this loop when the screen is pressed.
     }
+      // Do nothing. Will only get out of this loop when the screen is pressed.
     // Say 'Ouch' where the screen was pressed
-    Brain.Screen.printAt(Brain.Screen.xPosition(), Brain.Screen.yPosition(),
-                         "Ouch");
+    Brain.Screen.printAt(Brain.Screen.xPosition(), Brain.Screen.yPosition(), "Ouch");
   } // Go back to while (true) to repeat forever
 }
 
 void drivercontrol(void) {
   // get the controller values
-  double turnVal = Controller1.Axis4.position(
-      percent); // how much we want the robot to turn (turn)
-  double forwardVal =
-      -1 * Controller1.Axis2.position(
-               percent); // how much we want the robot to go forward (y)
-  double horizontalVal = Controller1.Axis1.position(
-      percent); // how much we want the robot to go sideways (x)
+  //double turnVal = Controller1.Axis4.position(percent); // how much we want the robot to turn (turn)
+  //double forwardVal = Controller1.Axis2.position(percent); // how much we want the robot to go forward (y)
+  //double horizontalVal = Controller1.Axis1.position(percent); // how much we want the robot to go sideways (x)
   // set the motor percntages
-  double frontLeftVelocity = ((-1 * forwardVal) - (horizontalVal) - (turnVal));
-  double frontRightVelocity = ((forwardVal) - (horizontalVal) - (turnVal));
-  double backLeftVelocity = ((-1 * forwardVal) + (horizontalVal) - (turnVal));
-  double backRightVelocity = ((forwardVal) + (horizontalVal) - (turnVal));
-  // spin to win
-  frontLeft.spin(directionType::fwd, frontLeftVelocity, velocityUnits::pct);
-  frontRight.spin(directionType::fwd, frontRightVelocity, velocityUnits::pct);
-  backLeft.spin(directionType::fwd, backLeftVelocity, velocityUnits::pct);
-  backRight.spin(directionType::fwd, backRightVelocity, velocityUnits::pct);
-  // motor syntax:
-  // motor.spin(directionType dir, double velocity, velocityUnits units)
+
+  //frontLeft.spin(vex::directionType::fwd, Controller1.Axis2.value() + Controller1.Axis4.value() - Controller1.Axis1.value(), vex::velocityUnits::pct);
+  //frontRight.spin(vex::directionType::fwd, Controller1.Axis2.value() + Controller1.Axis4.value() + Controller1.Axis1.value(), vex::velocityUnits::pct);
+  //backLeft.spin(vex::directionType::fwd, Controller1.Axis2.value() - Controller1.Axis4.value() + Controller1.Axis1.value(), vex::velocityUnits::pct);
+  //backRight.spin(vex::directionType::fwd, Controller1.Axis2.value() - Controller1.Axis4.value() - Controller1.Axis1.value(), vex::velocityUnits::pct);
+  //double frontLeftVelocity = ((-1 * forwardVal) - (horizontalVal) - (turnVal));
+  //double frontRightVelocity = ((forwardVal) - (horizontalVal) - (turnVal));
+  //double backLeftVelocity = ((-1 * forwardVal) + (horizontalVal) - (turnVal));
+  //double backRightVelocity = ((forwardVal) + (horizontalVal) - (turnVal));
+  while (true) {
+    // spin to win
+    frontLeft.spin(directionType::fwd,Controller1.Axis3.value()+Controller1.Axis4.value()+Controller1.Axis1.value() , velocityUnits::pct);
+    frontRight.spin(directionType::rev,Controller1.Axis3.value()-Controller1.Axis4.value()-Controller1.Axis1.value() , velocityUnits::pct);
+    backLeft.spin(directionType::fwd,Controller1.Axis3.value()-Controller1.Axis4.value()+Controller1.Axis1.value() , velocityUnits::pct);
+    backRight.spin(directionType::rev,Controller1.Axis3.value()+Controller1.Axis4.value()-Controller1.Axis1.value() , velocityUnits::pct);
+  }
 }
 
 // Set up  competition and callbacks
@@ -88,4 +85,3 @@ int main() {
   Competition.autonomous(autonomous);
   Competition.drivercontrol(drivercontrol);
 }
-//If you've read all the way to down here, thank you kind stranger, if not, tl;dr, hopefully it works!
