@@ -1,4 +1,6 @@
 # 2020-2021_Change_Up
+![Fox-Bot Logo](/assets/img/change-up-logo.jpg)
+
 The is the program for the autonomus and driver-contol based movement of the Vex EDR competeition for team "687 C - The Nerd Herd"
 
 ## Download Instructions
